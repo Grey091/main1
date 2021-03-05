@@ -103,6 +103,7 @@ namespace CNC12.ViewModels
             timer = new DispatcherTimer();
             timer.Tick += Timer_Tick;
             timer.Interval = new TimeSpan(0, 0, 0, 0, 5000); // update
+            // update 2
             timer.Start();
         }
 
