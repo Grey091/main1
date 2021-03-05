@@ -1,0 +1,477 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ManagerCNCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BaoTriCuaMayCNC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="100" />
+          <Property Name="FromTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CaLamViec">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="100" />
+          <Property Name="TimeStart" Type="time" Precision="7" />
+          <Property Name="TimeEnd" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="ChucVu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="EventManagerCNC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCNC" Type="int" Nullable="false" />
+          <Property Name="IdHienTrangMayCNC" Type="int" Nullable="false" />
+          <Property Name="IdHienTrangCuaMayCNC" Type="int" Nullable="false" />
+          <Property Name="Ngay" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ThoiDiem" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HienTrangCuaMayCNC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="HienTrangMayCNC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="MachinesCNC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Model" Type="nvarchar" MaxLength="100" />
+          <Property Name="IdBaoTriCuaMay" Type="int" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="100" />
+          <Property Name="IdCaLamViec" Type="int" Nullable="false" />
+          <Property Name="IdChucVu" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK__EventMana__IdCNC__22AA2996">
+          <End Role="MachinesCNC" Type="Self.MachinesCNC" Multiplicity="1" />
+          <End Role="EventManagerCNC" Type="Self.EventManagerCNC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MachinesCNC">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventManagerCNC">
+              <PropertyRef Name="IdCNC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EventMana__IdHie__21B6055D">
+          <End Role="HienTrangCuaMayCNC" Type="Self.HienTrangCuaMayCNC" Multiplicity="1" />
+          <End Role="EventManagerCNC" Type="Self.EventManagerCNC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HienTrangCuaMayCNC">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventManagerCNC">
+              <PropertyRef Name="IdHienTrangCuaMayCNC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EventMana__ThoiD__20C1E124">
+          <End Role="HienTrangMayCNC" Type="Self.HienTrangMayCNC" Multiplicity="1" />
+          <End Role="EventManagerCNC" Type="Self.EventManagerCNC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HienTrangMayCNC">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventManagerCNC">
+              <PropertyRef Name="IdHienTrangMayCNC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MachinesC__IdBao__1DE57479">
+          <End Role="BaoTriCuaMayCNC" Type="Self.BaoTriCuaMayCNC" Multiplicity="0..1" />
+          <End Role="MachinesCNC" Type="Self.MachinesCNC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BaoTriCuaMayCNC">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MachinesCNC">
+              <PropertyRef Name="IdBaoTriCuaMay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NhanVien__IdChuc__1B0907CE">
+          <End Role="ChucVu" Type="Self.ChucVu" Multiplicity="1" />
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChucVu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="IdChucVu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NhanVien__Passwo__1A14E395">
+          <End Role="CaLamViec" Type="Self.CaLamViec" Multiplicity="1" />
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CaLamViec">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="IdCaLamViec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ManagerCNCModelStoreContainer">
+          <EntitySet Name="BaoTriCuaMayCNC" EntityType="Self.BaoTriCuaMayCNC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CaLamViec" EntityType="Self.CaLamViec" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChucVu" EntityType="Self.ChucVu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventManagerCNC" EntityType="Self.EventManagerCNC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HienTrangCuaMayCNC" EntityType="Self.HienTrangCuaMayCNC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HienTrangMayCNC" EntityType="Self.HienTrangMayCNC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MachinesCNC" EntityType="Self.MachinesCNC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__EventMana__IdCNC__22AA2996" Association="Self.FK__EventMana__IdCNC__22AA2996">
+            <End Role="MachinesCNC" EntitySet="MachinesCNC" />
+            <End Role="EventManagerCNC" EntitySet="EventManagerCNC" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EventMana__IdHie__21B6055D" Association="Self.FK__EventMana__IdHie__21B6055D">
+            <End Role="HienTrangCuaMayCNC" EntitySet="HienTrangCuaMayCNC" />
+            <End Role="EventManagerCNC" EntitySet="EventManagerCNC" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EventMana__ThoiD__20C1E124" Association="Self.FK__EventMana__ThoiD__20C1E124">
+            <End Role="HienTrangMayCNC" EntitySet="HienTrangMayCNC" />
+            <End Role="EventManagerCNC" EntitySet="EventManagerCNC" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MachinesC__IdBao__1DE57479" Association="Self.FK__MachinesC__IdBao__1DE57479">
+            <End Role="BaoTriCuaMayCNC" EntitySet="BaoTriCuaMayCNC" />
+            <End Role="MachinesCNC" EntitySet="MachinesCNC" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NhanVien__IdChuc__1B0907CE" Association="Self.FK__NhanVien__IdChuc__1B0907CE">
+            <End Role="ChucVu" EntitySet="ChucVu" />
+            <End Role="NhanVien" EntitySet="NhanVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NhanVien__Passwo__1A14E395" Association="Self.FK__NhanVien__Passwo__1A14E395">
+            <End Role="CaLamViec" EntitySet="CaLamViec" />
+            <End Role="NhanVien" EntitySet="NhanVien" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ManagerCNCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ManagerCNCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BaoTriCuaMayCNCs" EntityType="ManagerCNCModel.BaoTriCuaMayCNC" />
+          <EntitySet Name="CaLamViecs" EntityType="ManagerCNCModel.CaLamViec" />
+          <EntitySet Name="ChucVus" EntityType="ManagerCNCModel.ChucVu" />
+          <EntitySet Name="EventManagerCNCs" EntityType="ManagerCNCModel.EventManagerCNC" />
+          <EntitySet Name="HienTrangCuaMayCNCs" EntityType="ManagerCNCModel.HienTrangCuaMayCNC" />
+          <EntitySet Name="HienTrangMayCNCs" EntityType="ManagerCNCModel.HienTrangMayCNC" />
+          <EntitySet Name="MachinesCNCs" EntityType="ManagerCNCModel.MachinesCNC" />
+          <EntitySet Name="NhanViens" EntityType="ManagerCNCModel.NhanVien" />
+          <AssociationSet Name="FK__MachinesC__IdBao__1DE57479" Association="ManagerCNCModel.FK__MachinesC__IdBao__1DE57479">
+            <End Role="BaoTriCuaMayCNC" EntitySet="BaoTriCuaMayCNCs" />
+            <End Role="MachinesCNC" EntitySet="MachinesCNCs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NhanVien__Passwo__1A14E395" Association="ManagerCNCModel.FK__NhanVien__Passwo__1A14E395">
+            <End Role="CaLamViec" EntitySet="CaLamViecs" />
+            <End Role="NhanVien" EntitySet="NhanViens" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NhanVien__IdChuc__1B0907CE" Association="ManagerCNCModel.FK__NhanVien__IdChuc__1B0907CE">
+            <End Role="ChucVu" EntitySet="ChucVus" />
+            <End Role="NhanVien" EntitySet="NhanViens" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EventMana__IdCNC__22AA2996" Association="ManagerCNCModel.FK__EventMana__IdCNC__22AA2996">
+            <End Role="MachinesCNC" EntitySet="MachinesCNCs" />
+            <End Role="EventManagerCNC" EntitySet="EventManagerCNCs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EventMana__IdHie__21B6055D" Association="ManagerCNCModel.FK__EventMana__IdHie__21B6055D">
+            <End Role="HienTrangCuaMayCNC" EntitySet="HienTrangCuaMayCNCs" />
+            <End Role="EventManagerCNC" EntitySet="EventManagerCNCs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EventMana__ThoiD__20C1E124" Association="ManagerCNCModel.FK__EventMana__ThoiD__20C1E124">
+            <End Role="HienTrangMayCNC" EntitySet="HienTrangMayCNCs" />
+            <End Role="EventManagerCNC" EntitySet="EventManagerCNCs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BaoTriCuaMayCNC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FromTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MachinesCNCs" Relationship="ManagerCNCModel.FK__MachinesC__IdBao__1DE57479" FromRole="BaoTriCuaMayCNC" ToRole="MachinesCNC" />
+        </EntityType>
+        <EntityType Name="CaLamViec">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TimeStart" Type="Time" Precision="7" />
+          <Property Name="TimeEnd" Type="Time" Precision="7" />
+          <NavigationProperty Name="NhanViens" Relationship="ManagerCNCModel.FK__NhanVien__Passwo__1A14E395" FromRole="CaLamViec" ToRole="NhanVien" />
+        </EntityType>
+        <EntityType Name="ChucVu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NhanViens" Relationship="ManagerCNCModel.FK__NhanVien__IdChuc__1B0907CE" FromRole="ChucVu" ToRole="NhanVien" />
+        </EntityType>
+        <EntityType Name="EventManagerCNC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCNC" Type="Int32" Nullable="false" />
+          <Property Name="IdHienTrangMayCNC" Type="Int32" Nullable="false" />
+          <Property Name="IdHienTrangCuaMayCNC" Type="Int32" Nullable="false" />
+          <Property Name="Ngay" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ThoiDiem" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MachinesCNC" Relationship="ManagerCNCModel.FK__EventMana__IdCNC__22AA2996" FromRole="EventManagerCNC" ToRole="MachinesCNC" />
+          <NavigationProperty Name="HienTrangCuaMayCNC" Relationship="ManagerCNCModel.FK__EventMana__IdHie__21B6055D" FromRole="EventManagerCNC" ToRole="HienTrangCuaMayCNC" />
+          <NavigationProperty Name="HienTrangMayCNC" Relationship="ManagerCNCModel.FK__EventMana__ThoiD__20C1E124" FromRole="EventManagerCNC" ToRole="HienTrangMayCNC" />
+        </EntityType>
+        <EntityType Name="HienTrangCuaMayCNC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EventManagerCNCs" Relationship="ManagerCNCModel.FK__EventMana__IdHie__21B6055D" FromRole="HienTrangCuaMayCNC" ToRole="EventManagerCNC" />
+        </EntityType>
+        <EntityType Name="HienTrangMayCNC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EventManagerCNCs" Relationship="ManagerCNCModel.FK__EventMana__ThoiD__20C1E124" FromRole="HienTrangMayCNC" ToRole="EventManagerCNC" />
+        </EntityType>
+        <EntityType Name="MachinesCNC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Model" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdBaoTriCuaMay" Type="Int32" />
+          <NavigationProperty Name="BaoTriCuaMayCNC" Relationship="ManagerCNCModel.FK__MachinesC__IdBao__1DE57479" FromRole="MachinesCNC" ToRole="BaoTriCuaMayCNC" />
+          <NavigationProperty Name="EventManagerCNCs" Relationship="ManagerCNCModel.FK__EventMana__IdCNC__22AA2996" FromRole="MachinesCNC" ToRole="EventManagerCNC" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdCaLamViec" Type="Int32" Nullable="false" />
+          <Property Name="IdChucVu" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CaLamViec" Relationship="ManagerCNCModel.FK__NhanVien__Passwo__1A14E395" FromRole="NhanVien" ToRole="CaLamViec" />
+          <NavigationProperty Name="ChucVu" Relationship="ManagerCNCModel.FK__NhanVien__IdChuc__1B0907CE" FromRole="NhanVien" ToRole="ChucVu" />
+        </EntityType>
+        <Association Name="FK__MachinesC__IdBao__1DE57479">
+          <End Type="ManagerCNCModel.BaoTriCuaMayCNC" Role="BaoTriCuaMayCNC" Multiplicity="0..1" />
+          <End Type="ManagerCNCModel.MachinesCNC" Role="MachinesCNC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BaoTriCuaMayCNC">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MachinesCNC">
+              <PropertyRef Name="IdBaoTriCuaMay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NhanVien__Passwo__1A14E395">
+          <End Type="ManagerCNCModel.CaLamViec" Role="CaLamViec" Multiplicity="1" />
+          <End Type="ManagerCNCModel.NhanVien" Role="NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CaLamViec">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="IdCaLamViec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NhanVien__IdChuc__1B0907CE">
+          <End Type="ManagerCNCModel.ChucVu" Role="ChucVu" Multiplicity="1" />
+          <End Type="ManagerCNCModel.NhanVien" Role="NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChucVu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="IdChucVu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EventMana__IdCNC__22AA2996">
+          <End Type="ManagerCNCModel.MachinesCNC" Role="MachinesCNC" Multiplicity="1" />
+          <End Type="ManagerCNCModel.EventManagerCNC" Role="EventManagerCNC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MachinesCNC">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventManagerCNC">
+              <PropertyRef Name="IdCNC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EventMana__IdHie__21B6055D">
+          <End Type="ManagerCNCModel.HienTrangCuaMayCNC" Role="HienTrangCuaMayCNC" Multiplicity="1" />
+          <End Type="ManagerCNCModel.EventManagerCNC" Role="EventManagerCNC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HienTrangCuaMayCNC">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventManagerCNC">
+              <PropertyRef Name="IdHienTrangCuaMayCNC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EventMana__ThoiD__20C1E124">
+          <End Type="ManagerCNCModel.HienTrangMayCNC" Role="HienTrangMayCNC" Multiplicity="1" />
+          <End Type="ManagerCNCModel.EventManagerCNC" Role="EventManagerCNC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HienTrangMayCNC">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventManagerCNC">
+              <PropertyRef Name="IdHienTrangMayCNC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ManagerCNCModelStoreContainer" CdmEntityContainer="ManagerCNCEntities">
+          <EntitySetMapping Name="BaoTriCuaMayCNCs">
+            <EntityTypeMapping TypeName="ManagerCNCModel.BaoTriCuaMayCNC">
+              <MappingFragment StoreEntitySet="BaoTriCuaMayCNC">
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="FromTime" ColumnName="FromTime" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CaLamViecs">
+            <EntityTypeMapping TypeName="ManagerCNCModel.CaLamViec">
+              <MappingFragment StoreEntitySet="CaLamViec">
+                <ScalarProperty Name="TimeEnd" ColumnName="TimeEnd" />
+                <ScalarProperty Name="TimeStart" ColumnName="TimeStart" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChucVus">
+            <EntityTypeMapping TypeName="ManagerCNCModel.ChucVu">
+              <MappingFragment StoreEntitySet="ChucVu">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventManagerCNCs">
+            <EntityTypeMapping TypeName="ManagerCNCModel.EventManagerCNC">
+              <MappingFragment StoreEntitySet="EventManagerCNC">
+                <ScalarProperty Name="ThoiDiem" ColumnName="ThoiDiem" />
+                <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+                <ScalarProperty Name="IdHienTrangCuaMayCNC" ColumnName="IdHienTrangCuaMayCNC" />
+                <ScalarProperty Name="IdHienTrangMayCNC" ColumnName="IdHienTrangMayCNC" />
+                <ScalarProperty Name="IdCNC" ColumnName="IdCNC" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HienTrangCuaMayCNCs">
+            <EntityTypeMapping TypeName="ManagerCNCModel.HienTrangCuaMayCNC">
+              <MappingFragment StoreEntitySet="HienTrangCuaMayCNC">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HienTrangMayCNCs">
+            <EntityTypeMapping TypeName="ManagerCNCModel.HienTrangMayCNC">
+              <MappingFragment StoreEntitySet="HienTrangMayCNC">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MachinesCNCs">
+            <EntityTypeMapping TypeName="ManagerCNCModel.MachinesCNC">
+              <MappingFragment StoreEntitySet="MachinesCNC">
+                <ScalarProperty Name="IdBaoTriCuaMay" ColumnName="IdBaoTriCuaMay" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NhanViens">
+            <EntityTypeMapping TypeName="ManagerCNCModel.NhanVien">
+              <MappingFragment StoreEntitySet="NhanVien">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IdChucVu" ColumnName="IdChucVu" />
+                <ScalarProperty Name="IdCaLamViec" ColumnName="IdCaLamViec" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

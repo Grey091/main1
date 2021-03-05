@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:CNC12.ResourceXAML"
+                    xmlns:conv="clr-namespace:CNC12.ConvertValue"
+                    xmlns:vm ="clr-namespace:CNC12.ViewModels">
+    <vm:VMmainWindow x:Key="VMmainWindow"></vm:VMmainWindow>
+    <vm:VMControlBar x:Key="VMcontrolBar"></vm:VMControlBar>
+    <vm:VMmanagerWindow x:Key="VMmanagerWindow"></vm:VMmanagerWindow>
+    <vm:VMreportWindow x:Key="VMreportWindow"></vm:VMreportWindow>
+    <vm:VMchartWindow x:Key="VMchartWindow"></vm:VMchartWindow>
+    <vm:VMlightSignal x:Key="VMlightSignal"></vm:VMlightSignal>
+    <conv:ColorConvertValue x:Key="ColorConvertValue"></conv:ColorConvertValue>
+</ResourceDictionary>

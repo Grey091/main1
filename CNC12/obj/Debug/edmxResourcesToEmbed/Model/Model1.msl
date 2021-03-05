@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ManagerCNCModelStoreContainer" CdmEntityContainer="ManagerCNCEntities">
+    <EntitySetMapping Name="BaoTriCuaMayCNCs">
+      <EntityTypeMapping TypeName="ManagerCNCModel.BaoTriCuaMayCNC">
+        <MappingFragment StoreEntitySet="BaoTriCuaMayCNC">
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="FromTime" ColumnName="FromTime" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CaLamViecs">
+      <EntityTypeMapping TypeName="ManagerCNCModel.CaLamViec">
+        <MappingFragment StoreEntitySet="CaLamViec">
+          <ScalarProperty Name="TimeEnd" ColumnName="TimeEnd" />
+          <ScalarProperty Name="TimeStart" ColumnName="TimeStart" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ChucVus">
+      <EntityTypeMapping TypeName="ManagerCNCModel.ChucVu">
+        <MappingFragment StoreEntitySet="ChucVu">
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventManagerCNCs">
+      <EntityTypeMapping TypeName="ManagerCNCModel.EventManagerCNC">
+        <MappingFragment StoreEntitySet="EventManagerCNC">
+          <ScalarProperty Name="ThoiDiem" ColumnName="ThoiDiem" />
+          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+          <ScalarProperty Name="IdHienTrangCuaMayCNC" ColumnName="IdHienTrangCuaMayCNC" />
+          <ScalarProperty Name="IdHienTrangMayCNC" ColumnName="IdHienTrangMayCNC" />
+          <ScalarProperty Name="IdCNC" ColumnName="IdCNC" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HienTrangCuaMayCNCs">
+      <EntityTypeMapping TypeName="ManagerCNCModel.HienTrangCuaMayCNC">
+        <MappingFragment StoreEntitySet="HienTrangCuaMayCNC">
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HienTrangMayCNCs">
+      <EntityTypeMapping TypeName="ManagerCNCModel.HienTrangMayCNC">
+        <MappingFragment StoreEntitySet="HienTrangMayCNC">
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MachinesCNCs">
+      <EntityTypeMapping TypeName="ManagerCNCModel.MachinesCNC">
+        <MappingFragment StoreEntitySet="MachinesCNC">
+          <ScalarProperty Name="IdBaoTriCuaMay" ColumnName="IdBaoTriCuaMay" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NhanViens">
+      <EntityTypeMapping TypeName="ManagerCNCModel.NhanVien">
+        <MappingFragment StoreEntitySet="NhanVien">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="IdChucVu" ColumnName="IdChucVu" />
+          <ScalarProperty Name="IdCaLamViec" ColumnName="IdCaLamViec" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
