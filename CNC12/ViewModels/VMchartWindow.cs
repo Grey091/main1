@@ -160,7 +160,7 @@ namespace CNC12.ViewModels
                     }                    
                 }               
             }
-            Segments1 = Math.Round(TimeMachineRun.TotalSeconds / TimeSurvey.TotalSeconds *100, 2);
+            Segments1 = Math.Round(TimeMachineRun.TotalSeconds / TimeSurvey.TotalSeconds *100, 2); // cc
 
             #region oldCode
             //var run2 = DataProvider.Ins.DB.EventManagerCNCs.Where(x => x.IdCNC == 2 && x.IdHienTrangMayCNC == 1).Count();
