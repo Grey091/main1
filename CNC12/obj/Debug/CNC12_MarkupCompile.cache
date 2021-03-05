@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Laptop MSI\Desktop\CNC12\CNC12\obj\Debug\
+C:\Users\Admin\main1\CNC12\obj\Debug\
 CNC12
 none
 false
 DEBUG;TRACE
-C:\Users\Laptop MSI\Desktop\CNC12\CNC12\App.xaml
+C:\Users\Admin\main1\CNC12\App.xaml
 7-477481789
 2-1556844510
 33-466470827
-31946933394
+31-1956628062
 ResourceXAML\MainResource.xaml;UserControls\ControlBar.xaml;UserControls\LedLamp.xaml;Views\ChartWindow.xaml;Views\MainWindow.xaml;Views\ManagerWindow.xaml;Views\ReportWindow.xaml;
 
 False
